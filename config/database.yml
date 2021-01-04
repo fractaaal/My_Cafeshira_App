@@ -79,7 +79,10 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  #<<: *default
   database: cafeshira_production
   username: cafeshira
   password: <%= ENV['CAFESHIRA_DATABASE_PASSWORD'] %>
