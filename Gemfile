@@ -6,6 +6,7 @@ ruby '2.6.3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.2', '>= 6.0.2.2'
 # Use postgresql as the database for Active Record
+gem 'pg', '>= 0.18', '< 2.0'
 group :production do
   gem 'pg', '>= 0.18', '< 2.0'
 end
