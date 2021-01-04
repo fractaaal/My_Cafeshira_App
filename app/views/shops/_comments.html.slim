@@ -1,0 +1,52 @@
+.container.w-75.my-3
+  - if account_signed_in?
+    p
+      button.btn.btn-outline-primary.btn-block.mx-auto aria-controls="collapseExample" aria-expanded="false" data-target="#collapseExample" data-toggle="collapse" type="button" 
+        | コメントする
+    #collapseExample.collapse
+      = form_with model:[@shop, @comment], method: :post, local: true do |f|
+        .form-group
+          = f.label :content, class: 'control-label'
+          span.badge.badge-secondary 120文字以内
+          = f.text_area :content, class: 'form-control'
+          = f.hidden_field :shop_id, value: @shop.id
+        .form-group
+          = f.label :recommended, class: 'control-label'
+          = f.text_field :recommended, class: 'form-control', id: 'shop_recommended'
+          = f.hidden_field :shop_id, value: @shop.id 
+        = f.submit '投稿する',class: 'btn btn-outline-info d-block mx-auto'
+  - else
+    .row.w-75.d-block.mx-auto
+      .col-md-6.col-md-offset-3.mx-auto.d-block
+         = link_to 'ログインしてコメントする', new_account_session_url, class: 'btn btn-info btn-block mb-4'
+
+#comments_page
+  .container.mb-5
+    p コメント一覧
+    - if @comments.any?
+      - @comments.each do |comment|  
+        .container.center-block.mb-2
+          .card.my-2 style=("width: 100%; height: 210px;") 
+            .card-header
+              span.card-link 投稿者:#{link_to comment.account.username, account_path(comment.account.id)}さん
+              span.card-link.text-right
+                - if account_signed_in? && current_account.id == comment.account_id 
+                  = link_to 'コメント削除' ,comment ,method: :delete, data: { confirm: "コメントを削除します。よろしいですか？"}, class: 'btn btn-outline-secondary btn-sm'
+
+            .card-body.px-2.py-2
+              - if comment.recommended.present?
+                .card-text
+                  span おすすめ
+                  span.badge.badge-secondary #{comment.recommended}
+              p.content-text
+                = comment.content
+
+            p.card-text.text-muted.text-right.mr-2.mb-2.content-text  #{time_ago_in_words(comment.created_at)} 前
+      = paginate @comments, remote: true
+    - else 
+     p コメントはありません       
+
+    
+
+
+

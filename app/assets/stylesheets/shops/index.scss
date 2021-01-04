@@ -1,0 +1,83 @@
+// Place all the styles related to the shops controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.container{
+    margin: 0;
+    padding: 0;
+}
+
+.shop-thumbnail{
+    width: 300px;
+    height: 250px;
+    object-fit: cover;
+}
+
+.no-thumbnail{
+    width: 300px;
+    height: 250px;
+    object-fit: contain;
+}
+
+.card{
+    width: 300px;
+    height: 300px;
+}
+
+.search-btn{
+    padding-top: 38px;
+    display:flex;
+    align-items: flex-end;
+}
+
+@media screen and (max-width:1200px) { 
+    .shop-thumbnail{
+        width: 250px;
+        height: 200px;
+        object-fit: cover;
+    }
+    
+    .card{
+        width: 250px;
+        height: 260px;
+    }
+}
+
+@media screen and (max-width:990px) { 
+    .shop-thumbnail{
+        width: 250px;
+        height: 200px;
+        object-fit: cover;
+    }
+    
+    .card{
+        width: 250px;
+        height: 260px;
+    }
+}
+
+@media screen and (max-width:767px) { 
+    .shop-thumbnail{
+        width: 220px;
+        height: 200px;
+        object-fit: cover;
+    }
+    
+    .card{
+        width: 220px;
+        height: 250px;
+    }
+}
+
+@media screen and (max-width:576px) { 
+    .shop-thumbnail{
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+    
+    .card{
+        width: auto;
+        height: auto;
+    }
+}

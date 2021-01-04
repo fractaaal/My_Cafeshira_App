@@ -1,0 +1,31 @@
+.jumbotron{
+    background-image: url(coffee.jpg);
+    background-size: cover;
+    background-position: center center;
+    height: 100vh;
+    position: relative;
+}
+
+.jumbotron::before{
+	background-color: rgba(0,0,0,0.5);
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	content: ' ';
+}
+
+.home-title{
+    font-family: 'Courgette', cursive;
+    width: 100%;
+    margin-top: 30vh;
+    color: white;
+    text-align: center;
+    position: absolute;
+    z-index: 1;
+}
+
+.home-title>p{
+    font-size: small;
+}

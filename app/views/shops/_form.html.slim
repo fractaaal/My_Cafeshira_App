@@ -1,0 +1,64 @@
+.container
+  = form_with model: shop, local: true do |f|
+    .form-group
+      = f.label :name
+      span.badge.badge-info 必須
+      span.badge.badge-secondary 30文字以内
+      = f.text_field :name, class: 'form-control', id: 'shop_name'
+    .form-group
+      = f.label :recommended
+      span.badge.badge-info 必須
+      = f.text_field :recommended, class: 'form-control', id: 'shop_recommended' 
+    .form-group
+      = f.label :prefecture_id, class: 'control-label'
+      span.badge.badge-info 必須
+      = f.select :prefecture_id, Shop.prefecture_ids.keys, {prompt: '選択してください'}, class: 'form-control' 
+    .form-group
+      = f.label :city
+      = f.text_field :city, class: 'form-control', id: 'address_city'
+    .form-group
+      = f.label :station, class: 'control-label'
+      = f.text_field :station, class: 'form-control'
+    .form-group
+      = f.label :open_at, class: 'control-label'
+      span.badge.badge-info 必須
+      = f.time_field :open_at, class: 'form-control'
+    .form-group
+      = f.label :close_at, class: 'control-label'
+      span.badge.badge-info 必須
+      = f.time_field :close_at, class: 'form-control'
+    .form-group
+      = f.label :holiday_id, class: 'control-label'
+      = f.select :holiday_id, Shop.holiday_ids.keys, {prompt: '選択してください',multiple:true, size:8}, class: 'form-control'
+    .form-group
+      = f.label :phone_number, class: 'control-label'
+      = f.text_field :phone_number, class: 'form-control' 
+    .form-group
+      = f.label :'評価', class: 'control-label'
+    .form-group
+      = f.label :bitterness, class: 'control-label'
+      = f.select :bitterness, [["1",1],["2",2],["3",3],["4",4],["5",5]] , {prompt: 1}, class: 'form-control' 
+    .form-group
+      = f.label :acidity, class: 'control-label'
+      = f.select :acidity, [["1",1],["2",2],["3",3],["4",4],["5",5]] , {prompt: '選択してください'}, class: 'form-control' 
+    .form-group 
+      = f.label :fragrance, class: 'control-label'
+      = f.select :fragrance, [["1",1],["2",2],["3",3],["4",4],["5",5]] , {prompt: '選択してください'}, class: 'form-control' 
+    .form-group  
+      = f.label :rich, class: 'control-label'
+      = f.select :rich, [["1",1],["2",2],["3",3],["4",4],["5",5]] , {prompt: '選択してください'}, class: 'form-control'  
+    .form-group
+      = f.label :sweetness, class: 'control-label'
+      = f.select :sweetness, [["1",1],["2",2],["3",3],["4",4],["5",5]] , {prompt: '選択してください'}, class: 'form-control'  
+    .form-group
+      = f.label :description
+      span.badge.badge-secondary 300文字以内
+      = f.text_area :description, rows: 5, class: 'form-control', id: 'shop_description' 
+    .form-group
+      .form-control-file
+        = f.label :image
+        = f.file_field :image, class: 'form-control-file'   
+    .form-group.my-3
+      = f.submit nil, class: 'btn btn-primary btn-block mb-2'
+  
+  

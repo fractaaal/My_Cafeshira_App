@@ -1,0 +1,41 @@
+/*
+ *= require_tree .
+ */
+
+@import "bootstrap";
+
+.navbar-brand {
+    font-family: 'Courgette', cursive;
+}
+
+.pagination{
+    justify-content: center;
+}
+
+.pagination>li>a {          
+    border: none;     
+    color: #696969;   
+}
+  
+.pagination>.active>a {     
+    background: #6fecd7;     
+    border-radius: 15px;
+    border-color: #696969   
+}
+  
+.pagination>li>a:hover {        
+    border-radius: 15px;    
+}
+
+.alert-notice {
+    @extend .alert-info;
+}
+  
+.alert-alert {
+    @extend .alert-danger;
+}
+
+
+
+
+

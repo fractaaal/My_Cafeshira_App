@@ -1,0 +1,28 @@
+.shop-image{
+    width: 50%;
+    object-fit: cover;
+    height: 100%;
+}
+
+table{
+    table-layout: fixed;
+}
+
+th{
+    width: 10%;
+}
+
+canvas{
+    width: 100%;
+}
+
+.content-text{
+    font-size: 0.8rem;
+}
+@media screen and (max-width:767px) { 
+    .shop-image{
+        width: 80%;
+        object-fit: cover;
+        height: 100%;
+    }
+}

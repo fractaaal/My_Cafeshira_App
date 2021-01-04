@@ -1,0 +1,81 @@
+.container
+  - if flash.notice.present?
+    - flash.each do |msg_type, msg|
+      #alert class=("alert alert-#{msg_type}") role="alert" 
+        = msg
+.container
+  h3.my-4 店舗一覧
+= render partial: 'search_form', locals: {shop: @shop}
+#index_page
+  .container
+    - if @search_params.blank?
+      .row.my-3.mx-3
+        - @shops.each do |shop|
+          .col-lg-4.col-sm-6
+            .card.mb-3
+              .bd-placeholder-img.card-img-top
+                = link_to shop_url(shop), class: "shop-card-link" do
+                  - if shop.image.thumb.url
+                    = image_tag shop.image.thumb.url, class:"img-fluid mx-auto d-block shop-thumbnail" 
+                  - else
+                    = image_tag "no_image", class:"img-fluid d-block no-thumbnail " 
+
+              .card-body
+                p3.card-title = link_to shop.name, shop_url(shop), class: "text-dark"
+                .row
+                  card-text.fa.fa-heart.like-btn
+                  ml-1 #{shop.favorites.count}
+                  card-text.fa.fa-comment.ml-2.mr-1.comment-btn
+                  mr-3 #{shop.comments.count}
+      = paginate @shops, remote: true
+
+
+    - else
+      - if @search_shops.blank?
+          p.text-center.py-3 一致する検索結果がありません。
+      - else
+        .row.my-3.mx-3
+          - @search_shops.each do |shop|
+            .col-lg-4.col-sm-6
+              .card.mb-3
+                .bd-placeholder-img.card-img-top
+                  = link_to shop_url(shop), class: "shop-card-link" do
+                    - if shop.image.thumb.url
+                      = image_tag shop.image.thumb.url, class:"img-fluid mx-auto d-block shop-thumbnail" 
+                    - else
+                      = image_tag "coffee", class:"img-fluid mx-auto d-block shop-thumbnail" 
+                .card-body
+                  p3.card-title = link_to shop.name, shop_url(shop), class: "text-dark"
+                  .row
+                    card-text.fa.fa-heart.like-btn
+                    ml-1 #{shop.favorites.count}
+                    card-text.fa.fa-comment.ml-2.mr-1.comment-btn
+                    mr-3 #{shop.comments.count}
+        = paginate @search_shops, remote: true
+.container
+  - if account_signed_in?
+    .row.w-75.d-block.mx-auto
+      .col-md-6.col-md-offset-3.mx-auto.d-block
+         = link_to 'カフェを投稿', new_shop_path, class: "btn btn-outline-info btn-lg my-5 w-100"
+
+  - else
+    .row.w-75.d-block.mx-auto
+      .col-md-6.col-md-offset-3.mx-auto.d-block
+          = link_to 'ログインしてカフェを投稿する', new_account_session_url, class: "btn btn-outline-info btn-lg my-5 w-100"
+
+
+
+
+
+
+      
+
+        
+    
+ 
+        
+
+        
+ 
+
+        

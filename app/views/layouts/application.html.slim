@@ -1,0 +1,41 @@
+doctype html
+html lang="ja"
+  head
+    title
+      | Cafeshira
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    = include_gon
+    = favicon_link_tag 'favi_cafe.png'
+    meta content="width=device-width, initial-scale=1" name="viewport" /
+    script src="https://kit.fontawesome.com/10ad47674d.js" crossorigin="anonymous"
+    link href="https://fonts.gstatic.com" rel="preconnect" /
+    link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet" /
+  body
+    .app-title.navbar.navbar-expand-md.navbar-dark.bg-dark.sticky-top
+      .navbar-brand 
+        = link_to "Cafeshira", root_url, class: "navbar-brand mr-4" 
+
+      button.navbar-toggler type="button" data-toggle="collapse" data-target="#navbar-content" 
+        span.navbar-toggler-icon
+      .collapse.navbar-collapse#navbar-content
+        ul.navbar-nav.ml-auto
+          - if account_signed_in?
+            li.nav-item = link_to 'ホーム', root_url, class: 'nav-link'
+            li.nav-item = link_to '店舗一覧', shops_path, class: 'nav-link'
+            li.nav-item = link_to 'カフェ投稿', new_shop_path, class: 'nav-link'
+            li.nav-item.dropdown.mr-5
+              = link_to "アカウント", '#', 'data-toggle': 'dropdown', class: "nav-link dropdown-toggle"
+              .dropdown-menu
+                = link_to 'マイページ', account_url(current_account), class: "dropdown-item"
+                = link_to 'アカウント編集', edit_account_registration_path, class: "dropdown-item"
+                = link_to 'ログアウト', destroy_account_session_path, method: :delete, class: "dropdown-item"
+          -  else
+            li.nav-item = link_to 'ホーム', root_url, class: 'nav-link'
+            li.nav-item= link_to '店舗一覧', shops_path, class: 'nav-link'
+            li.nav-item= link_to '新規登録', new_account_registration_path, class: 'nav-link'
+            li.nav-item= link_to 'ログイン', new_account_session_path, class: 'nav-link'
+
+    = yield

@@ -1,0 +1,29 @@
+#map 
+css:
+  #map {
+    height: 300px;
+    width: 80%;
+  }
+  @media screen and (max-width:767px) { 
+    #map {
+      height: 300px;
+      width: 100%;
+    }
+  }
+
+
+javascript:
+  let map;
+  let geocoder;
+  function initMap(){
+    geocoder = new google.maps.Geocoder()
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: #{shop.latitude}, lng:　#{shop.longitude}},
+      zoom: 15,
+    });
+    marker = new google.maps.Marker({
+      position:  {lat: #{shop.latitude}, lng:　#{shop.longitude}},
+      map: map
+    });
+  }
+script src="https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAP_API_KEY']}&callback=initMap"   

@@ -1,0 +1,22 @@
+.container.mb-5
+  p コメント一覧
+  - if @comments.any?
+    - @comments.each do |comment|  
+      .container.center-block.mb-2
+        .card.my-2 style=("width: 100%; height: 210px;") 
+          .card-header
+            span.card-link 投稿者:#{link_to comment.account.username, account_path(comment.account.id)}さん
+            span.card-link.text-right
+              - if account_signed_in? && current_account.id == comment.account_id 
+                = link_to 'コメント削除' ,comment ,method: :delete, data: { confirm: "コメントを削除します。よろしいですか？"}, class: 'btn btn-outline-secondary btn-sm'
+          .card-body
+            - if comment.recommended.present?
+              .card-text.px-2.py-2
+                span おすすめ
+                span.badge.badge-secondary #{comment.recommended}
+            p.content-text
+              = comment.content
+          p.card-text.text-muted.text-right.mr-2.mb-2.content-text  #{time_ago_in_words(comment.created_at)} 前
+    = paginate @comments, remote: true
+  - else 
+   p コメントはありません      

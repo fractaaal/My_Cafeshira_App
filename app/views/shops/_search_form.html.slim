@@ -1,0 +1,15 @@
+= form_with  url: shops_path, scope: :search, method: :get, local: true do |f|
+  .container.w-80
+    .row.border.rounded.search-container
+      .form-group.col-md-4.col-sm-6
+        = f.label :店名, class: 'col-form-label text-muted'
+        = f.text_field :name, value: @search_params[:name], class: 'form-control', id: 'shop_name'
+      .form-group.col-md-4.col-sm-6
+        = f.label :エリア, class: 'col-form-label text-muted'
+        = f.select :prefecture_id, Shop.prefecture_ids.keys, {prompt: '選択してください'}, class: 'form-control' 
+      .form-group.col-md-4.col-sm-4
+        .search-btn
+          = button_tag type: 'submit', class:"btn btn-outline-secondary btn-block mx-auto"
+            | 検索する
+            i.fas.fa-search
+          

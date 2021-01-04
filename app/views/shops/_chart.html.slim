@@ -1,0 +1,40 @@
+canvas.mb-3  id="myRaderChart" 
+script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"
+javascript:
+  var recommended = gon.shop_recommended;
+  var bitterness = gon.shop_bitterness;
+  var acidity = gon.shop_acidity;
+  var fragrance = gon.shop_fragrance;
+  var rich = gon.shop_rich;
+  var sweetness = gon.shop_sweetness;
+  var ctx = document.getElementById("myRaderChart");
+  var myRadarChart = new Chart(ctx, {
+    type: 'radar', 
+    data: { 
+      labels: ["苦味", "酸味", "香り", "コク", "甘み"],
+      datasets: [{
+        label: recommended,
+        data: [bitterness, acidity, fragrance, rich, sweetness],
+        backgroundColor: 'RGBA(225,95,150, 0.5)',
+        borderColor: 'RGBA(225,95,150, 1)',
+        borderWidth: 1,
+        pointBackgroundColor: 'RGB(46,106,177)'
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+      },
+      scale:{
+        ticks:{
+            suggestedMin: 0,
+            suggestedMax: 5,
+            stepSize: 1,
+            callback: function(value, index, values){
+                return  value +  ''
+            }
+        }
+      }
+    }
+  });
+

@@ -1,0 +1,49 @@
+.container
+  - if shop.image.thumb.url
+    img.text-center = image_tag shop.image.thumb.url, class: "my-3 img-fluid d-block mx-auto shop-image"
+  - else
+    img.text-center = image_tag "no_image", class: "my-3 img-fluid d-block mx-auto shop-image"
+
+.container
+  table.table.table-hover style="table-layout:fixed;"
+    tbody
+      tr
+        th.text-center style="width:100px;"
+          = Shop.human_attribute_name('投稿者')
+        td = link_to shop.account.username, account_path(shop.account.id)
+      tr 
+       th.text-center = Shop.human_attribute_name(:prefecture_id)
+       td= shop.prefecture_id
+      tr 
+       th.text-center = Shop.human_attribute_name(:city)
+       td= shop.city
+      tr 
+       th.text-center = Shop.human_attribute_name(:station)
+       td= shop.station
+      tr 
+       th.text-center = Shop.human_attribute_name(:open_at)
+       td= shop.open_at.strftime("%H:%M")
+      tr 
+       th.text-center = Shop.human_attribute_name(:close_at)
+       td= shop.close_at.strftime("%H:%M")
+      tr 
+       th.text-center = Shop.human_attribute_name(:holiday_id)
+       td= shop.holiday_id
+      tr 
+       th.text-center = Shop.human_attribute_name(:phone_number)
+       td= link_to shop.phone_number, "tel:#{shop.phone_number}"
+      tr 
+       th.text-center = Shop.human_attribute_name(:recommended)
+       td= shop.recommended
+      tr
+       th.text-center = Shop.human_attribute_name(:description)
+       td= simple_format(h(shop.description), {}, sanitize: false, wrapper_tag: "div")
+      - if shop.prefecture_id
+        tr
+          th.text-center = Shop.human_attribute_name('アクセス')
+          td.embeded-responsive.embeded-responsive-4by3.text-center       
+            = render partial: 'map', locals: { shop: shop}
+            
+.container-fluid
+  h5.text-center #{shop.recommended}の特徴
+  = render partial: 'chart', locals: { shop: shop}

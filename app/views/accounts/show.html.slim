@@ -1,0 +1,96 @@
+= form_with model: @account, local: true do |f|
+
+.container
+  h3.mt-3.mb-5 #{@account.username}さんのページ
+
+.container.my-3.text-center
+  - if @account.image?
+    td= image_tag @account.image.thumb.url, class: "my-3 img-fluid rounded-circle account-image"
+  - else
+    td= image_tag "account", class: "my-3 img-fluid rounded-circle account-image" 
+.container.w-75
+  table.table
+    tbody
+      tr
+        th = Account.human_attribute_name(:username)
+      tr
+        td = @account.username
+      tr
+        th = Account.human_attribute_name(:profile)
+      tr
+        td =  @account.profile
+
+.container
+  h5.mt-3.mb-5 #{@account.username}さんの投稿
+  - if @shops.any?
+    .row.my-3.mx-3
+      - @shops.each do |shop|
+        .col-lg-4.col-sm-6
+          .card.mb-3
+            .bd-placeholder-img.card-img-top
+              = link_to shop_url(shop), class: "shop-card-link" do
+                - if shop.image.thumb.url
+                  = image_tag shop.image.thumb.url, class:"img-fluid mx-auto d-block shop-thumbnail" 
+                - else
+                  = image_tag "coffee", class:"img-fluid mx-auto d-block shop-thumbnail" 
+
+            .card-body
+              p.card-title = link_to shop.name, shop_url(shop), class: "text-dark"
+              .row
+                card-title.fa.fa-heart.like-btn
+                ml-1 #{shop.favorites.count}
+                card-title.fa.fa-comment.ml-2.mr-1.comment-btn
+                mr-3 #{shop.comments.count}
+  - else
+    p 投稿したカフェはありません
+
+.container
+  h5.mt-3.mb-5 いいね！したカフェ
+  - if @favorite_shops.any?
+    .row.my-3.mx-3
+      - @favorite_shops.each do |shop|
+        .col-lg-4.col-sm-6
+          .card.mb-3
+            .bd-placeholder-img.card-img-top
+              = link_to shop_url(shop), class: "shop-card-link" do
+                - if shop.image.thumb.url
+                  = image_tag shop.image.thumb.url, class:"img-fluid mx-auto d-block shop-thumbnail" 
+                - else
+                  = image_tag "coffee", class:"img-fluid mx-auto d-block shop-thumbnail" 
+
+            .card-body
+              p.card-title = link_to shop.name, shop_url(shop), class: "text-dark"
+              .row
+                card-title.fa.fa-heart.like-btn
+                ml-1 #{shop.favorites.count}
+                card-title.fa.fa-comment.ml-2.mr-1.comment-btn
+                mr-3 #{shop.comments.count}
+  - else
+    p いいね!したカフェはありません
+
+#comments_page
+  .container
+    h5.mt-3.mb-5 コメント一覧
+    - if @comments.any?
+      - @comments.each do |comment|  
+        .container.center-block.mb-2
+          .card.my-2 style=("width: 100%; height: 210px;") 
+            .card-header
+              span.card-link #{link_to comment.shop.name, shop_url(comment.shop_id)}
+              span.card-link
+                - if account_signed_in? && current_account.id == comment.account_id 
+                  = link_to 'コメント削除' ,comment ,method: :delete, data: { confirm: "コメントを削除します。よろしいですか？"}, class: 'btn btn-outline-secondary btn-sm'
+
+            .card-body
+              - if comment.recommended.present?
+                .card-text
+                  span おすすめ
+                  span.badge.badge-secondary #{comment.recommended}
+              p.content-text 
+                = comment.content
+
+            p.card-text.text-muted.text-right.mr-2.mb-2.content-text  #{time_ago_in_words(comment.created_at)} 前
+      = paginate @comments, remote: true
+
+    - else
+      p コメントしたカフェはありません

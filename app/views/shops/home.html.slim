@@ -1,0 +1,15 @@
+.home-background
+  .jumbotron.jumbotron-fluid.mb-0
+    .container
+      - if flash.notice.present?
+        - flash.each do |msg_type, msg|
+          #alert class=("alert alert-#{msg_type}") role="alert" 
+            = msg
+    .container-fluid
+      .home-title
+        h1.display-3 Cafeshira
+        p.lead コーヒーマニアのためのサイト。
+        - if account_signed_in?
+          = link_to "投稿を見る", shops_path, class: 'btn btn-outline-info w-15 my-2 my-sm-0'
+        - else        
+          = link_to "ログイン", new_account_session_path, class: 'btn btn-outline-info w-15 my-2 my-sm-0'

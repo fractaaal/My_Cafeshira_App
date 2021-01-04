@@ -1,0 +1,14 @@
+.container
+  h3.my-4 カフェの投稿
+  .nav.justify-content-end
+    = link_to '一覧へ戻る', shops_path, class: 'btn btn-outline-secondary my-2 my-sm-0'
+
+  -if @shop.errors.any? 
+    - @shop.errors.full_messages.each do |message| 
+      .alert.alert-warning  
+        ul
+          #alert role="alert" 
+            a.close data-dismiss="alert" href="#"  ×
+            li= message
+
+= render partial: 'form', locals: {shop: @shop}

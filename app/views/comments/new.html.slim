@@ -1,0 +1,21 @@
+= form_with model: @comment, method: :post do |f|
+  .form-group
+    = f.text_area :content, class: 'form-control'
+  .form-group
+    = f.label :'評価', class: 'control-label'
+  .form-group
+    = f.label :bitterness, class: 'control-label'
+    = f.select :bitterness, [["1",1],["2",2],["3",3],["4",4],["5",5]] , {prompt: 1}, class: 'form-control' 
+  .form-group
+    = f.label :acidity, class: 'control-label'
+    = f.select :acidity, [["1",1],["2",2],["3",3],["4",4],["5",5]] , {prompt: '選択してください'}, class: 'form-control' 
+  .form-group 
+    = f.label :fragrance, class: 'control-label'
+    = f.select :fragrance, [["1",1],["2",2],["3",3],["4",4],["5",5]] , {prompt: '選択してください'}, class: 'form-control' 
+  .form-group  
+    = f.label :rich, class: 'control-label'
+    = f.select :rich, [["1",1],["2",2],["3",3],["4",4],["5",5]] , {prompt: '選択してください'}, class: 'form-control'  
+  .form-group
+    = f.label :sweetness, class: 'control-label'
+    = f.select :sweetness, [["1",1],["2",2],["3",3],["4",4],["5",5]] , {prompt: '選択してください'}, class: 'form-control'  
+  = f.submit 'コメントする',class: 'btn btn-info'

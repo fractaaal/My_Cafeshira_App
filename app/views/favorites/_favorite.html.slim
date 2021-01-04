@@ -1,0 +1,18 @@
+  - if account_signed_in?
+    -if shop.favorited_by?(current_account)
+      p.text-right.my-3
+        = link_to shop_favorites_path(shop.id), method: :delete, remote: true
+          i.fa.fa-heart.unlike-btn
+          span
+            = shop.favorites.count
+    -else
+      p.text-right.my-3
+        = link_to shop_favorites_path(shop.id), method: :post, remote: true
+          i.far.fa-heart.like-btn 
+          span
+            = shop.favorites.count
+        
+  -else
+    p.text-right.my-3
+      span.fa.fa-heart.unlike-btn
+      = shop.favorites.count

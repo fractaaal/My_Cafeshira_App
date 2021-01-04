@@ -1,0 +1,26 @@
+.container
+    - if flash.notice.present?
+      - flash.each do |msg_type, msg|
+        #alert class=("alert alert-#{msg_type}") role="alert" 
+          = msg
+
+.container
+  h3.text-center.my-4 #{@shop.name}
+  .container.w-75
+    div id="favorites_buttons_#{@shop.id}"
+      = render partial: 'favorites/favorite', locals: { shop: @shop}
+
+  .nav.justify-content-end
+    = link_to '一覧へ戻る', shops_path, class: 'btn btn-outline-secondary my-2 my-sm-0'
+
+= render partial: 'info', locals: {shop: @shop}
+
+.container.w-75
+  - if account_signed_in? && current_account.id == @shop.account_id 
+    = link_to '編集' ,edit_shop_path, class: 'btn btn-block mx-auto btn-outline-info my-3'
+    = link_to '削除' ,@shop ,method: :delete, data: { confirm: "「#{@shop.name}」を削除します。よろしいですか？"}, class: 'btn btn-block btn-outline-secondary my-3'
+
+= render partial: 'comments'
+
+
+
