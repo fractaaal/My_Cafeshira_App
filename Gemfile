@@ -75,3 +75,4 @@ gem 'devise-i18n-views'
 gem 'devise-bootstrap-views'
 gem 'mini_magick'
 gem "dotenv-rails"
+gem 'fog-aws'
