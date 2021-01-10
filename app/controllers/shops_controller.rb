@@ -20,6 +20,8 @@ class ShopsController < ApplicationController
     gon.shop_fragrance = @shop.fragrance
     gon.shop_rich = @shop.rich
     gon.shop_sweetness = @shop.sweetness
+    gon.shop_latitude = @shop.latitude
+    gon.shop_longitude = @shop.longitude
     @comments = @shop.comments.order(created_at: :desc).page(params[:page]).per(5)
 
     if account_signed_in?
