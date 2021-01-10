@@ -1,18 +1,31 @@
-#map 
-css:
-  #map {
-    height: 300px;
-    width: 80%;
-  }
-  @media screen and (max-width:767px) { 
-    #map {
-      height: 300px;
-      width: 100%;
-    }
-  }
-
-
 javascript:
+  function initMap() {
+    var test ={ lat: #{shop.latitude}, lng: #{shop.longitude} };
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 15,
+      center: test
+    });
+    var transitLayer = new google.maps.TransitLayer();
+    transitLayer.setMap(map);
+
+    var contentString = "住所：#{shop.city} ";
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+
+    var marker = new google.maps.Marker({
+      position:test,
+      map: map,
+      title: contentString
+    });
+
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+  }
+
+
+/javascript:
   function initMap() {}
   
   let map;
@@ -29,3 +42,17 @@ javascript:
     });
   }
 script async="" defer="defer" src="https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAP_API_KEY']}&callback=initMap"   
+
+css:
+  #map {
+    height: 300px;
+    width: 80%;
+  }
+  @media screen and (max-width:767px) { 
+    #map {
+      height: 300px;
+      width: 100%;
+    }
+  }
+
+#map 
