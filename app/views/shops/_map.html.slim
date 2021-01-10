@@ -1,9 +1,13 @@
 javascript:
   function initMap() {
-    var test ={ lat: gon.shop_latitude, lng:gon.shop_longitude };
+    var lat = gon.shop_latitude;
+    var lng = gon.shop_longitude;
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 15,
-      center: test
+      center: {
+        lat: lat,
+        lng: lng
+      },
     });
     var transitLayer = new google.maps.TransitLayer();
     transitLayer.setMap(map);
@@ -14,7 +18,10 @@ javascript:
     });
 
     var marker = new google.maps.Marker({
-      position:test,
+      position:{
+        lat: lat,
+        lng: lng
+      },
       map: map,
       title: contentString
     });
