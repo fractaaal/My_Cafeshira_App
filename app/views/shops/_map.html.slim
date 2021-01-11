@@ -1,5 +1,29 @@
 javascript:
   function initMap() {
+    var target = document.getElementById('map');  
+    var geocoder = new google.maps.Geocoder();  
+
+    geocoder.geocode({ address: '#{shop.city}' }, function(results, status){
+       if (status === 'OK' && results[0]){  
+          map = new google.maps.Map(target, {
+            center: results[0].geometry.location,
+            zoom: 15
+          });
+          new google.maps.Marker({
+            position: results[0].geometry.location,
+            map: map
+          });
+       }else{ 
+         alert('失敗しました。理由: ' + status);
+         return;
+       }
+    });
+  }
+
+
+/javascript:
+  function initMap() {
+    var geocoder = new google.maps.Geocoder();
     var lat = gon.shop_latitude;
     var lng = gon.shop_longitude;
     var map = new google.maps.Map(document.getElementById('map'), {
@@ -11,12 +35,10 @@ javascript:
     });
     var transitLayer = new google.maps.TransitLayer();
     transitLayer.setMap(map);
-
     var contentString = "住所：#{shop.city} ";
     var infowindow = new google.maps.InfoWindow({
       content: contentString
     });
-
     var marker = new google.maps.Marker({
       position:{
         lat: lat,
@@ -25,7 +47,6 @@ javascript:
       map: map,
       title: contentString
     });
-
     marker.addListener('click', function() {
       infowindow.open(map, marker);
     });
