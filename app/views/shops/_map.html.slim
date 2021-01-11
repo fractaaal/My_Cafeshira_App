@@ -19,56 +19,7 @@ javascript:
        }
     });
   }
-
-
-/javascript:
-  function initMap() {
-    var geocoder = new google.maps.Geocoder();
-    var lat = gon.shop_latitude;
-    var lng = gon.shop_longitude;
-    var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 15,
-      center: {
-        lat: lat,
-        lng: lng
-      },
-    });
-    var transitLayer = new google.maps.TransitLayer();
-    transitLayer.setMap(map);
-    var contentString = "住所：#{shop.city} ";
-    var infowindow = new google.maps.InfoWindow({
-      content: contentString
-    });
-    var marker = new google.maps.Marker({
-      position:{
-        lat: lat,
-        lng: lng
-      },
-      map: map,
-      title: contentString
-    });
-    marker.addListener('click', function() {
-      infowindow.open(map, marker);
-    });
-  }
-
-
-/javascript:
-  function initMap() {}
   
-  let map;
-  let geocoder;
-  function initMap(){
-    geocoder = new google.maps.Geocoder()
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: #{shop.latitude}, lng:　#{shop.longitude}},
-      zoom: 15,
-    });
-    marker = new google.maps.Marker({
-      position:  {lat: #{shop.latitude}, lng:　#{shop.longitude}},
-      map: map
-    });
-  }
 script async="" defer="defer" src="https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_MAP_API_KEY']}&callback=initMap"   
 
 css:
