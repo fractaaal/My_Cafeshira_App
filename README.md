@@ -1,24 +1,58 @@
 # 自作アプリ「Cafeshira」について
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 説明
+- 本アプリはRuby on Railsを独学で学んで最初に作成したWebアプリケーション
+- カフェショップの店舗情報やコーヒーの特徴や口コミを投稿できる
+- 投稿時にコーヒーの苦味、甘味、酸味、香り、コクを５段階で評価できる&情報共有できる
 
-Things you may want to cover:
+## 制作のきっかけ
+- 「こんなアプリケーション世の中にあったら」を第一に考え、既存にない新規性があるサービスを作りたかった
+- カフェ好きやコーヒーマニアをターゲットとしたものを作りたかった
+- 自分の力でサービスを作ってみたかった
 
-* Ruby version
+## 使用方法
+- 店舗一覧から投稿されたカフェショップの情報や口コミを参照できます。
+- トップ画面から新規登録を選択しユーザー名やパスワードを登録するとカフェショップの投稿やいいね!、コメントができるようになります。
+- 自分が投稿したカフェショップの情報は編集や削除ができます。
+- アカウントタブよりマイページを選択すると自分が投稿したカフェショップやいいね!した投稿、コメントした投稿を確認することができます。
 
-* System dependencies
+## 使用技術
+** フロントエンド
+- slim
+- SCSS
+- jQuery
+- boostrap4
 
-* Configuration
+** バックエンド
+- Ruby2.6.6
+- Ruby on Rails 6.0.3.4
 
-* Database creation
+** 画像
+- carrierwave
 
-* Database initialization
+** ユーザー管理
+- devise
 
-* How to run the test suite
+** グラフ
+- chart.js
 
-* Services (job queues, cache servers, search engines, etc.)
+** データベース
+- PostgreSQL
 
-* Deployment instructions
+** インフラ・開発環境
+- AWS S3,IAM(画像)
+- heroku
 
-* ...
+** バージョン管理
+- Git(Github)
+
+## 機能
+- ユーザーの新規登録
+- ログイン・ログアウト
+- カフェショップの店舗情報の投稿
+- ユーザー情報の参照
+- コーヒーの苦味、甘味、酸味、香り、コクを５段階で評価し、グラフ化で可視化
+- いいね!機能（Ajax非同期）
+- コメント機能
+- ページネーション（Ajax非同期)
+- Google Map API(Maps JavaScript API,Geocoding API)を用いたカフェショップへのアクセス表示
