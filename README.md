@@ -1,5 +1,5 @@
 # 自作アプリ「Cafeshira」について
-
+- リンク: [Cafeshira](https://cafeshira.herokuapp.com/)
 ## 説明
 - 本アプリはRuby on Railsを独学で学んで最初に作成したWebアプリケーション
 - カフェショップの店舗情報やコーヒーの特徴や口コミを投稿できる
